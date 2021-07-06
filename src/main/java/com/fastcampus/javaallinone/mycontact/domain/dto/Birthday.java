@@ -12,15 +12,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class Birthday {
-    private int yearOfBirthday;
+    private Integer yearOfBirthday;
 
     @Min(1)
     @Max(12)
-    private int monthOfBirthday;
+    private Integer monthOfBirthday;
 
     @Min(1)
     @Max(31)
-    private int dayOfBirthday;
+    private Integer dayOfBirthday;
 
     // LocalDate형으로 한번 Wrapping
     // 날짜 양식 잘 지켰는지 확인(02월 30일 등 불가능한 수치 걸러내기)
