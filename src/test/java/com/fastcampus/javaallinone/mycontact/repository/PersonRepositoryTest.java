@@ -1,10 +1,12 @@
 package com.fastcampus.javaallinone.mycontact.repository;
 
 import com.fastcampus.javaallinone.mycontact.domain.Person;
+import com.fastcampus.javaallinone.mycontact.domain.dto.Birthday;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,5 +49,37 @@ class PersonRepositoryTest {
         map.put(person1, person1.getAge());
         System.out.println(map);
         System.out.println(map.get(person2));
+    }
+
+    @Test
+    void findByBloodType(){
+        createPersonList();
+
+        List<Person> result = personRepository.findByBloodType("A");
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void findByBirthdayBetween(){
+        createPersonList();
+
+        List<Person> reuslt =
+                personRepository.findByMonthOfBirthday(8);
+
+        reuslt.forEach(System.out::println);
+    }
+
+    private void createPersonList(){
+        givenPerson("Martin", 10, "A", LocalDate.of(1991, 8, 30));
+        givenPerson("David", 9, "B", LocalDate.of(1992,7, 10));
+        givenPerson("Dennis", 8, "O", LocalDate.of(1993, 1, 5));
+        givenPerson("Sophia", 7, "AB", LocalDate.of(1994, 6, 30));
+        givenPerson("Benny", 6, "A", LocalDate.of(1995, 8, 30));
+    }
+
+    private void givenPerson(String name, int age, String bloodType, LocalDate birthday){
+        Person person = new Person(name, age, bloodType);
+        person.setBirthday(new Birthday(birthday));
+        personRepository.save(person);
     }
 }

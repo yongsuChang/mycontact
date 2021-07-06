@@ -19,12 +19,13 @@ public class PersonService {
     @Autowired
     private BlockRepository blockRepository;
 
-    public List<Person> getPeopleElcludeBlocks(){
-        List<Person> personList = personRepository.findAll();
+    public List<Person> getPeopleExcludeBlocks(){
+        return personRepository.findByBlockIsNull();
+    }
 
-        return personList.stream().filter(person ->
-                person.getBlock() == null)  // 각 사람의 이름을 blockNameList와 비교
-                .collect(Collectors.toList());              // 안 걸리는 사람들만 List로
+    // Query Method 사용하면 깔끔하게 WHERE문 사용 가능
+    public List<Person> getPersonListByName(String name){
+        return personRepository.findAllByName(name);
     }
 
     @Transactional(readOnly = true)

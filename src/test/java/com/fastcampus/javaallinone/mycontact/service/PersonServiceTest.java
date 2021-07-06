@@ -25,11 +25,18 @@ class PersonServiceTest {
     public void getPeopleExcludeBlocks(){
         givenPersonList();
 
-        List<Person> result = personService.getPeopleElcludeBlocks();
+        List<Person> result = personService.getPeopleExcludeBlocks();
 //        System.out.println(result);
         result.forEach(System.out::println);
     }
 
+    @Test
+    public void getPeopleByName(){
+        givenPersonList();
+        List<Person> result = personService.getPersonListByName("Martin");
+
+        result.forEach(System.out::println);
+    }
     @Test
     void cascadeTest(){
         givenPersonList();
